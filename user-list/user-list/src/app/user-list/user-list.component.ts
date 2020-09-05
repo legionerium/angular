@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UsersService} from '../users.service';
+import {User} from '../shered/user';
+import {query} from '@angular/animations';
 
 @Component({
   selector: 'app-user-list',
@@ -8,7 +10,7 @@ import {UsersService} from '../users.service';
 })
 export class UserListComponent implements OnInit {
 
-  usersList = [];
+  usersList: User[] = [];
   constructor(public userService: UsersService) { }
 
   ngOnInit(): void {
@@ -16,4 +18,14 @@ export class UserListComponent implements OnInit {
 
   }
 
+  // tslint:disable-next-line:no-shadowed-variable typedef
+  search(query: string){
+    this.usersList = this.userService.findUser(query);
+  }
+
+  // tslint:disable-next-line:typedef
+  sort(direction: string) {
+    console.log(direction);
+    this.usersList = this.userService.sortUsers(direction);
+  }
 }
