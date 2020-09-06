@@ -118,4 +118,16 @@ export class UsersService {
     const direction = !!parseInt(val, 10) ? -1 : 1;
     return this.usersList.sort((a, b) => direction * (a.username > b.username ? 1 : -1));
   }
+
+  // tslint:disable-next-line:typedef
+  addUser(user: User){
+    this.usersList.unshift(user);
+  }
+
+  // tslint:disable-next-line:typedef
+  deleteUsers(users: User[]){
+    users.forEach(user => {
+      this.usersList = this.usersList.filter(item => item.id !== user.id);
+    });
+  }
 }
